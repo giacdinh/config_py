@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=maso
+Exec=python /home/pi/.config/autostart/maso.py

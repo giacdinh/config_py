@@ -13,8 +13,8 @@ uip = ["UNIT IP ADDRESS"]
 def clientlist():
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 	sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-	sock.bind(('',1999))
-	sock.settimeout(20.0) # end socket if nothing read for 20s
+	sock.bind(('',2999))
+	sock.settimeout(2.0) # end socket if nothing read for 20s
 	k = 0
 	timeout = time.time() + 30 # scan UPD for 30s set time out for scan loop
 	#socket.settimeout(5.0)		# set 5s timeout for each socket listening
@@ -35,7 +35,7 @@ def clientlist():
 
 		if j == 1:
 			uip.append(address)
-			uid.append(data)
+			uid.append(str(data))
 
 		k += 1
 		time.sleep(1)
@@ -83,65 +83,78 @@ def configupdate(addressIP):
 window = Tk()
 
 window.title("Panotti Config Tools")
-window.geometry('870x400');
+window.geometry('900x400');
 #window.configure(bg='cyan')
 
 clientlist()
 length = len(uip)
 # First row
-for i in range(length):
-	lbl = Label(window, text=uid[i], bg="white")
+#for i in range(length):
+for i in range(10) :
+	if i < length:
+		uidlabel = str(uid[i])
+		uiplabel = str(uip[i])
+	elif i >= length:
+		uidlabel = str('                  ')
+		uiplabel = str('                     ')
+
+	lbl = Label(window, text=uidlabel, bg="white")
 	lbl.grid(column=0, row=i)
-	lbl = Label(window, text=uip[i], bg="white")
+	lbl = Label(window, text=uiplabel, bg="white")
 	lbl.grid(column=1, row=i)
 	if i == 0:
 		lbl = Label(window, text='PANOTTI FUNCTIONAL OPTIONS', bg='powder blue')
 		lbl.grid(column=2, row=i, columnspan = 7)
 		continue
 	elif i == 1:
-		btn1 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn1))
+		btn1 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn1))
 		btn1.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn1))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn1))
 		btn.grid(column=3, row=i)
 	elif i == 2:
-		btn2 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn2))
+		btn2 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn2))
 		btn2.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn2))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn2))
 		btn.grid(column=3, row=i)
 	elif i == 3:
-		btn3 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn3))
+		btn3 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn3))
 		btn3.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn3))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn3))
 		btn.grid(column=3, row=i)
 	elif i == 4:
-		btn4 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn4))
+		btn4 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn4))
 		btn4.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn4))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn4))
 		btn.grid(column=3, row=i)
 	elif i == 5:
-		btn5 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn5))
+		btn5 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn5))
 		btn5.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn5))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn5))
 		btn.grid(column=3, row=i)
 	elif i == 6:
-		btn6 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn6))
+		btn6 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn6))
 		btn6.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn6))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn6))
 		btn.grid(column=3, row=i)
 	elif i == 7:
-		btn7 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn7))
+		btn7 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn7))
 		btn7.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn7))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn7))
 		btn.grid(column=3, row=i)
 	elif i == 8:
-		btn8 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uip[i],btn8))
+		btn8 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn8))
 		btn8.grid(column=2, row=i)
-		btn = Button(window, text="Stop read", command=lambda:stopread(uip[i],btn8))
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn8))
+		btn.grid(column=3, row=i)
+	elif i == 9:
+		btn9 = Button(window, text="Start read", bg='powder blue', command=lambda:startread(uiplabel,btn9))
+		btn9.grid(column=2, row=i)
+		btn = Button(window, text="Stop read", command=lambda:stopread(uiplabel,btn9))
 		btn.grid(column=3, row=i)
 
 	btn = Button(window, text="FW Upgrade")
 	btn.grid(column=4, row=i)
-	btn = Button(window, text="Config Upgrade", command=lambda:configupdate(uip[i]))
+	btn = Button(window, text="Config Upgrade", command=lambda:configupdate(uiplabel))
 	btn.grid(column=5, row=i)
 	btn = Button(window, text="Get Config")
 	btn.grid(column=6, row=i)
@@ -155,7 +168,7 @@ def close_window():
 
 data, address = getUDP()
 button = Button (window, text = "Exit", bg='green2', command = close_window)
-button.grid(column=0, row=3)
+button.grid(column=0, row=10)
 
 app = Menu()
 window.mainloop()

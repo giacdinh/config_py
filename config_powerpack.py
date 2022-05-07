@@ -72,7 +72,7 @@ window.title("PopwerPack Config Tools")
 window.geometry('700x200');
 #window.configure(bg='cyan')
 
-clientlist()
+#clientlist()
 length = len(uip)
 # First row
 for i in range(length):

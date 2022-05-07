@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=slide
+Exec=/home/pi/.config/autostart/screensaver.sh 2 
